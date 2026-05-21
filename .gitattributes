@@ -1,0 +1,2 @@
+# Drizzle internal state — never hand-edited
+drizzle/meta/*.json linguist-generated=true

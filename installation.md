@@ -45,7 +45,7 @@ DATABASE_URL=postgres://user:password@localhost/releases_db
 
 # Optional
 # POLL_CRON=0 * * * *        # How often to check releases (default: every hour)
-# DIGEST_CRON=30 8 * * *     # When to send the daily digest in UTC (default: 08:30)
+# DIGEST_CRON=30 7 * * *     # When to send the daily digest in UTC (default: 07:30 UTC = 09:30 Europe/Rome CEST, 08:30 CET)
 ```
 
 ### 2. Start the app

@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version (eg: x.x.x)"
+        type: string
+        required: true
+
+env:
+  DOCKER_IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
+  release:
+    needs: test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: aboutbits/github-actions-base/git-setup@v2
+        with:
+          user-name: github-actions[bot]
+          user-email: github-actions[bot]@users.noreply.github.com
+      - name: Set version in package.json
+        run: jq '.version = "${{ github.event.inputs.version }}"' package.json > tmp.json && mv tmp.json package.json
+      - uses: aboutbits/github-actions-docker/build-push@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.DOCKER_IMAGE }}
+          docker-tag: ${{ github.event.inputs.version }}
+          platforms: linux/amd64,linux/arm64
+      - uses: aboutbits/github-actions-base/git-commit-and-push-all@v2
+        with:
+          message: ${{ github.event.inputs.version }}
+      - uses: aboutbits/github-actions-base/git-create-or-update-tag@v2
+        with:
+          tag-name: v${{ github.event.inputs.version }}
+      - uses: aboutbits/github-actions-base/github-create-release@v2
+        with:
+          tag-name: v${{ github.event.inputs.version }}

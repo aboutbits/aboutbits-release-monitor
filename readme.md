@@ -55,5 +55,5 @@ The app ships as a Docker image. Migrations run automatically on startup.
 docker run -d \
   --env-file .env \
   --restart unless-stopped \
-  yourdockerhubuser/github-slack-app:latest
+  ghcr.io/aboutbits/aboutbits-release-monitor:latest
 ```

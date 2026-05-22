@@ -26,7 +26,7 @@ export function buildDigestBlocks(
       type: 'header',
       text: {
         type: 'plain_text',
-        text: ':package: Daily Release Digest',
+        text: ':package: Release Digest',
         emoji: true,
       },
     },

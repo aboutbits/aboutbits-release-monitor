@@ -73,7 +73,7 @@ async function sendDigestForChannel(channelId: string): Promise<void> {
   const blocks = buildDigestBlocks([...byRepo.values()])
   const sent = await sendBlocks(
     channelId,
-    ':package: Daily Release Digest',
+    ':package: Release Digest',
     blocks,
   )
 

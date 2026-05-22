@@ -2,7 +2,7 @@
 
 A Slack bot that monitors repositories for new releases and posts updates to your channels.
 
-- **Daily digest** - one message per channel per day, grouped by repo
+- **Periodic digest** - one message per channel per configured interval, grouped by repo
 - **Immediate notifications** - get notified right away for every new stable release
 - **Instant security alerts** - security releases are posted immediately to all subscribers regardless of their notification mode
 - **Per-channel subscriptions** - each channel manages its own list independently
@@ -20,7 +20,7 @@ A Slack bot that monitors repositories for new releases and posts updates to you
 
 | Mode | Behaviour |
 |---|---|
-| `digest` | Batched into the daily digest _(default)_ |
+| `digest` | Batched into the periodic digest _(default)_ |
 | `immediately` | Posted as soon as a new stable release is discovered |
 | `security-only` | Only security releases are posted immediately; others are skipped entirely |
 

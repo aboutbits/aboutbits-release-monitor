@@ -2,7 +2,7 @@ import type { NotificationMode } from '@db/schema'
 import type { KnownBlock } from '@slack/types'
 
 const MODE_DESCRIPTIONS: Record<NotificationMode, string> = {
-  digest: 'daily digest',
+  digest: 'periodic digest',
   immediately: 'all releases immediately',
   'security-only': 'security alerts only',
 }

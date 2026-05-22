@@ -6,7 +6,7 @@ import {
   index,
   integer,
   jsonb,
-  pgTable,
+  pgSchema,
   text,
   timestamp,
   unique,
@@ -14,7 +14,9 @@ import {
 
 export type NotificationMode = 'digest' | 'immediately' | 'security-only'
 
-export const repositories = pgTable(
+const tableBuilder = pgSchema(process.env.DATABASE_SCHEMA ?? 'main').table
+
+export const repositories = tableBuilder(
   'repositories',
   {
     id: bigserial('id', { mode: 'bigint' }).primaryKey(),
@@ -32,7 +34,7 @@ export const repositories = pgTable(
   (t) => [unique().on(t.forge, t.owner, t.repo)],
 )
 
-export const subscriptions = pgTable(
+export const subscriptions = tableBuilder(
   'subscriptions',
   {
     id: bigserial('id', { mode: 'bigint' }).primaryKey(),
@@ -52,7 +54,7 @@ export const subscriptions = pgTable(
   ],
 )
 
-export const releases = pgTable(
+export const releases = tableBuilder(
   'releases',
   {
     id: bigserial('id', { mode: 'bigint' }).primaryKey(),
@@ -82,7 +84,7 @@ export const releases = pgTable(
   ],
 )
 
-export const notifications = pgTable(
+export const notifications = tableBuilder(
   'notifications',
   {
     id: bigserial('id', { mode: 'bigint' }).primaryKey(),

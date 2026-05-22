@@ -7,7 +7,7 @@ import { runPollJob } from '@jobs/poll'
 
 await migrate(db, {
   migrationsFolder: './drizzle',
-  migrationsSchema: 'public',
+  migrationsSchema: process.env.DATABASE_SCHEMA ?? 'main',
 })
 console.log('Migrations applied')
 

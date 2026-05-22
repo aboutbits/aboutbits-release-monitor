@@ -47,6 +47,8 @@ bun run db:migrate   # apply migrations manually
 
 Migrations are also applied automatically on startup, so `db:migrate` is only needed when running outside of the app (e.g. to inspect the schema before starting).
 
+The database schema is controlled by the `DATABASE_SCHEMA` environment variable (default: main). The public schema is not supported as a value: this slack app uses Drizzle ORM, and Drizzle's `pgSchema()` rejects public, it expects you to use pgTable() directly for the default schema instead. Avoiding public is good practice anyway: it's on every role's default search_path and has historically been a namespace-pollution and privilege-escalation vector, so a dedicated schema keeps the namespace clean and permissions explicit.
+
 ## Deployment
 
 The app ships as a Docker image. Migrations run automatically on startup.

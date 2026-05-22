@@ -11,6 +11,7 @@
       "devDependencies": {
         "@aboutbits/eslint-config": "^5.1.0",
         "@aboutbits/prettier-config": "^2.0.2",
+        "@aboutbits/ts-config": "^1.1.16",
         "@types/bun": "latest",
         "drizzle-kit": "^0.31.10",
         "eslint": "^9",
@@ -25,6 +26,8 @@
     "@aboutbits/eslint-config": ["@aboutbits/eslint-config@5.1.0", "https://npm.pkg.github.com/download/@aboutbits/eslint-config/5.1.0/d52d80ee2b18033481e8644deee62386bf3e7e00", { "dependencies": { "@eslint/eslintrc": "^3.3.4", "@eslint/js": "^9.39.3", "@eslint/json": "^1.0.1", "@typescript-eslint/eslint-plugin": "^8.56.1", "@typescript-eslint/parser": "^8.56.1", "eslint-config-prettier": "^10.1.8", "eslint-import-resolver-typescript": "^4.4.4", "eslint-plugin-better-tailwindcss": "^4.3.0", "eslint-plugin-formatjs": "^6.2.0", "eslint-plugin-import": "^2.32.0", "eslint-plugin-jest": "^29.15.0", "eslint-plugin-jsonc": "^3.1.0", "eslint-plugin-jsx-a11y": "^6.10.2", "eslint-plugin-mdx": "^3.6.2", "eslint-plugin-prettier": "^5.5.5", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^6.1.1", "eslint-plugin-sort-keys": "^2.3.5", "eslint-plugin-unused-imports": "^4.4.1", "globals": "^17.3.0", "typescript-eslint": "^8.56.1" }, "peerDependencies": { "@next/eslint-plugin-next": "^14 || ^15 || ^16", "eslint": "^9", "eslint-plugin-storybook": "^10", "prettier": "^3", "typescript": "^4.9 || ^5" } }, "sha512-oEDFqfbktb5nXdi3GbX1esQnzdzsY0B2THvp+X7Dn45ZdUAtHe5X+/2bXPU/ZngLn/M8GpkCfHY6DwV4jDQ10Q=="],
 
     "@aboutbits/prettier-config": ["@aboutbits/prettier-config@2.0.2", "https://npm.pkg.github.com/download/@aboutbits/prettier-config/2.0.2/60e5a139f16a46c5ff7b06054a893e50bcfb0ad0", { "peerDependencies": { "prettier": "^3.0.0" } }, "sha512-u8R8tKM8KB9kjcW1TX82MBG2WM5aUXgbYZwJTIW/p8aot42ET9sYu0h0pZWiiNiDpM211zCvOKSHSxwz9QHzhA=="],
+
+    "@aboutbits/ts-config": ["@aboutbits/ts-config@1.1.16", "https://npm.pkg.github.com/download/@aboutbits/ts-config/1.1.16/e1ed0f359055e4c3b8561a6114b82f9742a032c2", { "peerDependencies": { "typescript": "^5.0.0" } }, "sha512-ymz1GcfihNbaVzCDj1JekXmTNG7g5AoW2RlCJ6OUPuoAFDneyoqWno+6NoJOxtC8IaMjxo87BJBqO5Re4aOtYw=="],
 
     "@adobe/css-tools": ["@adobe/css-tools@4.4.4", "", {}, "sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg=="],
 

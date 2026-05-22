@@ -3,10 +3,16 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      version:
-        description: "Version (eg: x.x.x)"
-        type: string
+      bump:
+        description: "Version bump"
+        type: choice
         required: true
+        default: patch
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
 
 env:
   DOCKER_IMAGE: ghcr.io/${{ github.repository }}
@@ -27,25 +33,29 @@ jobs:
       - uses: actions/checkout@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: oven-sh/setup-bun@v2
       - uses: aboutbits/github-actions-base/git-setup@v2
         with:
           user-name: github-actions[bot]
           user-email: github-actions[bot]@users.noreply.github.com
-      - name: Set version in package.json
-        run: jq '.version = "${{ github.event.inputs.version }}"' package.json > tmp.json && mv tmp.json package.json
+      - name: Bump version in package.json
+        id: version
+        run: |
+          bun pm version ${{ github.event.inputs.bump }} --no-git-tag-version
+          echo "version=$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
       - uses: aboutbits/github-actions-docker/build-push@v1
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           docker-image: ${{ env.DOCKER_IMAGE }}
-          docker-tag: ${{ github.event.inputs.version }}
+          docker-tag: ${{ steps.version.outputs.version }}
           platforms: linux/amd64,linux/arm64
       - uses: aboutbits/github-actions-base/git-commit-and-push-all@v2
         with:
-          message: ${{ github.event.inputs.version }}
+          message: ${{ steps.version.outputs.version }}
       - uses: aboutbits/github-actions-base/git-create-or-update-tag@v2
         with:
-          tag-name: v${{ github.event.inputs.version }}
+          tag-name: v${{ steps.version.outputs.version }}
       - uses: aboutbits/github-actions-base/github-create-release@v2
         with:
-          tag-name: v${{ github.event.inputs.version }}
+          tag-name: v${{ steps.version.outputs.version }}

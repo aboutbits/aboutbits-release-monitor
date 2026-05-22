@@ -1,4 +1,5 @@
 import { defineConfig } from 'drizzle-kit';
+import { DB_SCHEMA } from '@db/schema.ts';
 
 export default defineConfig({
     schema: './src/db/schema.ts',
@@ -8,6 +9,6 @@ export default defineConfig({
         url: process.env.DATABASE_URL!,
     },
     migrations: {
-        schema: process.env.DATABASE_SCHEMA ?? 'main',
+        schema: DB_SCHEMA,
     },
 })

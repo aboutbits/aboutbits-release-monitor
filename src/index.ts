@@ -2,12 +2,13 @@ import { migrate } from 'drizzle-orm/bun-sql/migrator'
 import { app } from '@bot/app'
 import '@bot/commands/index'
 import { db } from '@db/client'
+import { DB_SCHEMA } from '@db/schema'
 import { runDigestJob } from '@jobs/digest'
 import { runPollJob } from '@jobs/poll'
 
 await migrate(db, {
   migrationsFolder: './drizzle',
-  migrationsSchema: process.env.DATABASE_SCHEMA ?? 'main',
+  migrationsSchema: DB_SCHEMA,
 })
 console.log('Migrations applied')
 

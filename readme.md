@@ -47,9 +47,7 @@ bun run db:migrate   # apply migrations manually
 
 Migrations are also applied automatically on startup, so `db:migrate` is only needed when running outside of the app (e.g. to inspect the schema before starting).
 
-The database schema is controlled by the `DATABASE_SCHEMA` environment variable (default: `main`). The `public` schema is not supported as a value: this slack app uses Drizzle ORM, and Drizzle's `pgSchema()` rejects public, it expects you to use pgTable() directly for the default schema instead. Avoiding `public` is good practice anyway: it's on every role's default search_path and has historically been a namespace-pollution and privilege-escalation vector, so a dedicated schema keeps the namespace clean and permissions explicit.
-
-`DATABASE_SCHEMA` is a **deploy-time decision**: treat it as fixed for the lifetime of a deployment. The migration files are generated for a specific schema name and committed to the repository. If you change `DATABASE_SCHEMA` after the initial setup, you must regenerate the migrations (`bun run db:generate`) and apply them, otherwise the app will query a schema that does not exist.
+All tables live in the `main` PostgreSQL schema (hardcoded in [`src/db/schema.ts`](./src/db/schema.ts) and [`drizzle.config.ts`](./drizzle.config.ts)). The `public` schema is intentionally avoided: it is on every role's default search_path and has historically been a namespace-pollution and privilege-escalation vector. To use a different schema, change the string in both files and regenerate the migrations with `bun run db:generate`.
 
 ## Deployment
 

@@ -9,8 +9,6 @@ declare module 'bun' {
 
     // Database
     DATABASE_URL: string
-    DATABASE_SCHEMA?: string
-
     // Jobs
     POLL_CRON?: string
     DIGEST_CRON?: string

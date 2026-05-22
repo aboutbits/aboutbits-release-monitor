@@ -71,11 +71,7 @@ async function sendDigestForChannel(channelId: string): Promise<void> {
   }
 
   const blocks = buildDigestBlocks([...byRepo.values()])
-  const sent = await sendBlocks(
-    channelId,
-    ':package: Release Digest',
-    blocks,
-  )
+  const sent = await sendBlocks(channelId, ':package: Release Digest', blocks)
 
   if (sent) {
     // Send-then-mark is intentional: at-least-once. If we crash between the

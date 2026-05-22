@@ -44,12 +44,11 @@ GITHUB_TOKEN=github_pat_     # GitHub PAT with read access
 DATABASE_URL=postgres://user:password@localhost/releases_db
 
 # Optional
-# DATABASE_SCHEMA=main        # PostgreSQL schema for all tables (default: main, public is not supported)
 # POLL_CRON=0 * * * *        # How often to check releases (default: every hour)
 # DIGEST_CRON=30 7 * * *     # When to send the periodic digest in UTC (default: 07:30 UTC)
 ```
 
-> **Note:** `DATABASE_SCHEMA` is a deploy-time decision: pick a value once and keep it. The migration files are generated for a specific schema name. Changing it later requires regenerating and re-applying migrations.
+All tables are created in the `main` PostgreSQL schema. To use a different schema, change the hardcoded value in `src/db/schema.ts` and `drizzle.config.ts`, then regenerate and re-apply migrations.
 
 ### 2. Start the app
 

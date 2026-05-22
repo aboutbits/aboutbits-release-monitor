@@ -14,7 +14,9 @@ import {
 
 export type NotificationMode = 'digest' | 'immediately' | 'security-only'
 
-const tableBuilder = pgSchema(process.env.DATABASE_SCHEMA ?? 'main').table
+export const DB_SCHEMA = 'main'
+
+const tableBuilder = pgSchema(DB_SCHEMA).table
 
 export const repositories = tableBuilder(
   'repositories',

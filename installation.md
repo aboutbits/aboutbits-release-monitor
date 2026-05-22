@@ -44,9 +44,12 @@ GITHUB_TOKEN=github_pat_     # GitHub PAT with read access
 DATABASE_URL=postgres://user:password@localhost/releases_db
 
 # Optional
+# DATABASE_SCHEMA=main        # PostgreSQL schema for all tables (default: main, public is not supported)
 # POLL_CRON=0 * * * *        # How often to check releases (default: every hour)
-# DIGEST_CRON=30 7 * * *     # When to send the daily digest in UTC (default: 07:30 UTC = 09:30 Europe/Rome CEST, 08:30 CET)
+# DIGEST_CRON=30 7 * * *     # When to send the periodic digest in UTC (default: 07:30 UTC)
 ```
+
+> **Note:** `DATABASE_SCHEMA` is a deploy-time decision: pick a value once and keep it. The migration files are generated for a specific schema name. Changing it later requires regenerating and re-applying migrations.
 
 ### 2. Start the app
 

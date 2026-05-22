@@ -1,4 +1,4 @@
-CREATE TABLE "notifications" (
+CREATE TABLE "main"."notifications" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"release_id" bigint NOT NULL,
 	"channel_id" text NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE "notifications" (
 	CONSTRAINT "notifications_release_id_channel_id_unique" UNIQUE("release_id","channel_id")
 );
 --> statement-breakpoint
-CREATE TABLE "releases" (
+CREATE TABLE "main"."releases" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"repository_id" bigint NOT NULL,
 	"forge_release_id" text NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE "releases" (
 	CONSTRAINT "releases_repository_id_forge_release_id_unique" UNIQUE("repository_id","forge_release_id")
 );
 --> statement-breakpoint
-CREATE TABLE "repositories" (
+CREATE TABLE "main"."repositories" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"forge" text NOT NULL,
 	"owner" text NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE "repositories" (
 	CONSTRAINT "repositories_forge_owner_repo_unique" UNIQUE("forge","owner","repo")
 );
 --> statement-breakpoint
-CREATE TABLE "subscriptions" (
+CREATE TABLE "main"."subscriptions" (
 	"id" bigserial PRIMARY KEY NOT NULL,
 	"channel_id" text NOT NULL,
 	"repository_id" bigint NOT NULL,
@@ -45,9 +45,9 @@ CREATE TABLE "subscriptions" (
 	CONSTRAINT "subscriptions_channel_id_repository_id_unique" UNIQUE("channel_id","repository_id")
 );
 --> statement-breakpoint
-ALTER TABLE "notifications" ADD CONSTRAINT "notifications_release_id_releases_id_fk" FOREIGN KEY ("release_id") REFERENCES "public"."releases"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "releases" ADD CONSTRAINT "releases_repository_id_repositories_id_fk" FOREIGN KEY ("repository_id") REFERENCES "public"."repositories"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "subscriptions" ADD CONSTRAINT "subscriptions_repository_id_repositories_id_fk" FOREIGN KEY ("repository_id") REFERENCES "public"."repositories"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-CREATE INDEX "idx_notifications_channel_id" ON "notifications" USING btree ("channel_id");--> statement-breakpoint
-CREATE INDEX "idx_releases_repository_id_published_at" ON "releases" USING btree ("repository_id","published_at" DESC);--> statement-breakpoint
-CREATE INDEX "idx_subscriptions_repository_id" ON "subscriptions" USING btree ("repository_id");
+ALTER TABLE "main"."notifications" ADD CONSTRAINT "notifications_release_id_releases_id_fk" FOREIGN KEY ("release_id") REFERENCES "main"."releases"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "main"."releases" ADD CONSTRAINT "releases_repository_id_repositories_id_fk" FOREIGN KEY ("repository_id") REFERENCES "main"."repositories"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "main"."subscriptions" ADD CONSTRAINT "subscriptions_repository_id_repositories_id_fk" FOREIGN KEY ("repository_id") REFERENCES "main"."repositories"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+CREATE INDEX "idx_notifications_channel_id" ON "main"."notifications" USING btree ("channel_id");--> statement-breakpoint
+CREATE INDEX "idx_releases_repository_id_published_at" ON "main"."releases" USING btree ("repository_id","published_at" DESC);--> statement-breakpoint
+CREATE INDEX "idx_subscriptions_repository_id" ON "main"."subscriptions" USING btree ("repository_id");

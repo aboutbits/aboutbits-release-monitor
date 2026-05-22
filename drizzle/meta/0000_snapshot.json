@@ -1,12 +1,12 @@
 {
-  "id": "c7fc6cbd-c7f4-4fb3-8ce3-d9e21967bea7",
+  "id": "89b081eb-18ab-488e-bc22-89ab47f856f1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.notifications": {
+    "main.notifications": {
       "name": "notifications",
-      "schema": "",
+      "schema": "main",
       "columns": {
         "id": {
           "name": "id",
@@ -62,6 +62,7 @@
           "name": "notifications_release_id_releases_id_fk",
           "tableFrom": "notifications",
           "tableTo": "releases",
+          "schemaTo": "main",
           "columnsFrom": [
             "release_id"
           ],
@@ -87,9 +88,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.releases": {
+    "main.releases": {
       "name": "releases",
-      "schema": "",
+      "schema": "main",
       "columns": {
         "id": {
           "name": "id",
@@ -188,6 +189,7 @@
           "name": "releases_repository_id_repositories_id_fk",
           "tableFrom": "releases",
           "tableTo": "repositories",
+          "schemaTo": "main",
           "columnsFrom": [
             "repository_id"
           ],
@@ -213,9 +215,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.repositories": {
+    "main.repositories": {
       "name": "repositories",
-      "schema": "",
+      "schema": "main",
       "columns": {
         "id": {
           "name": "id",
@@ -291,9 +293,9 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.subscriptions": {
+    "main.subscriptions": {
       "name": "subscriptions",
-      "schema": "",
+      "schema": "main",
       "columns": {
         "id": {
           "name": "id",
@@ -355,6 +357,7 @@
           "name": "subscriptions_repository_id_repositories_id_fk",
           "tableFrom": "subscriptions",
           "tableTo": "repositories",
+          "schemaTo": "main",
           "columnsFrom": [
             "repository_id"
           ],

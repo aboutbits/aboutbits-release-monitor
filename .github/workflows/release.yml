@@ -1,0 +1,61 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump"
+        type: choice
+        required: true
+        default: patch
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
+
+env:
+  DOCKER_IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+    secrets: inherit
+
+  release:
+    needs: test
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: oven-sh/setup-bun@v2
+      - uses: aboutbits/github-actions-base/git-setup@v2
+        with:
+          user-name: github-actions[bot]
+          user-email: github-actions[bot]@users.noreply.github.com
+      - name: Bump version in package.json
+        id: version
+        run: |
+          bun pm version ${{ github.event.inputs.bump }} --no-git-tag-version
+          echo "version=$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
+      - uses: aboutbits/github-actions-docker/build-push@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          docker-image: ${{ env.DOCKER_IMAGE }}
+          docker-tag: ${{ steps.version.outputs.version }}
+          platforms: linux/amd64,linux/arm64
+      - uses: aboutbits/github-actions-base/git-commit-and-push-all@v2
+        with:
+          message: ${{ steps.version.outputs.version }}
+      - uses: aboutbits/github-actions-base/git-create-or-update-tag@v2
+        with:
+          tag-name: v${{ steps.version.outputs.version }}
+      - uses: aboutbits/github-actions-base/github-create-release@v2
+        with:
+          tag-name: v${{ steps.version.outputs.version }}

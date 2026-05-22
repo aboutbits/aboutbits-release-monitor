@@ -1,0 +1,38 @@
+{
+  "display_information": {
+    "name": "Release Monitor",
+    "description": "Monitors repositories and notifies channels when a new stable release is published.",
+    "background_color": "#24292e"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "Release Monitor",
+      "always_online": false
+    },
+    "slash_commands": [
+      {
+        "command": "/releases",
+        "description": "Add, remove and manage releases for different forges",
+        "should_escape": false
+      }
+    ]
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "chat:write",
+        "commands"
+      ]
+    },
+    "pkce_enabled": false
+  },
+  "settings": {
+    "interactivity": {
+      "is_enabled": false
+    },
+    "org_deploy_enabled": false,
+    "socket_mode_enabled": true,
+    "token_rotation_enabled": false,
+    "is_mcp_enabled": false
+  }
+}

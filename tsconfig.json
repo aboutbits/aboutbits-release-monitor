@@ -1,0 +1,23 @@
+{
+  "extends": "@aboutbits/ts-config",
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "Preserve",
+    "moduleDetection": "force",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "types": ["bun"],
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@db/*":       ["./src/db/*"],
+      "@forges/*":   ["./src/forges/*"],
+      "@bot/*":      ["./src/slack/*"],
+      "@jobs/*":     ["./src/jobs/*"],
+      "@classify/*": ["./src/classify/*"]
+    }
+  }
+}

@@ -32,12 +32,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
       - uses: oven-sh/setup-bun@v2
       - uses: aboutbits/github-actions-base/git-setup@v2
-        with:
-          user-name: github-actions[bot]
-          user-email: github-actions[bot]@users.noreply.github.com
       - name: Bump version in package.json
         id: version
         run: |

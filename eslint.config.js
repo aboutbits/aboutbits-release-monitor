@@ -13,7 +13,7 @@ export default defineConfig([
     rules: {
       // Ignore Bun built-in module specifiers (bun:test, bun:sqlite, etc.)
       'import/no-unresolved': ['error', { ignore: ['^bun:'] }],
-      // Backend app — console logging is intentional
+      // Backend app - console logging is intentional
       'no-console': 'off',
     },
   },

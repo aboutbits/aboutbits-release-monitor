@@ -1,4 +1,4 @@
-/** Raw GitHub API response shape — internal to this forge implementation. */
+/** Raw GitHub API response shape - internal to this forge implementation. */
 export type GithubApiRelease = {
   id: number
   tag_name: string

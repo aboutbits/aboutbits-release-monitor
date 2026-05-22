@@ -48,6 +48,6 @@ export async function sendBlocks(
     }
   }
 
-  // Unreachable — the loop always returns or throws.
+  // Unreachable - the loop always returns or throws.
   throw new Error('sendBlocks: exhausted retries')
 }

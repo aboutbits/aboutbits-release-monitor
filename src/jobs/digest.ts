@@ -79,7 +79,7 @@ async function sendDigestForChannel(channelId: string): Promise<void> {
 
   if (sent) {
     // Send-then-mark is intentional: at-least-once. If we crash between the
-    // Slack call and this insert, the next digest re-delivers — better than
+    // Slack call and this insert, the next digest re-delivers - better than
     // at-most-once, which would silently drop a digest.
     const releaseIds = pending.map((p) => p.release.id)
     await db

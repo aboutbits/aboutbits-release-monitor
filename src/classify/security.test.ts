@@ -13,7 +13,7 @@ function release(overrides: Partial<Release> = {}): Release {
   }
 }
 
-describe('checkSecurityRelease — definitive identifiers', () => {
+describe('checkSecurityRelease - definitive identifiers', () => {
   test.each([
     {
       body: 'Fixes CVE-2024-12345.',
@@ -28,7 +28,7 @@ describe('checkSecurityRelease — definitive identifiers', () => {
       expectedReason: 'Contains OSV identifier',
     },
   ])(
-    '$expectedReason in body → high confidence',
+    '$expectedReason in body -> high confidence',
     ({ body, expectedReason }) => {
       const result = checkSecurityRelease(release({ body }))
       expect(result.isSecurity).toBe(true)
@@ -54,7 +54,7 @@ describe('checkSecurityRelease — definitive identifiers', () => {
   })
 })
 
-describe('checkSecurityRelease — strong phrase signals', () => {
+describe('checkSecurityRelease - strong phrase signals', () => {
   test.each([
     {
       body: 'security advisory released',
@@ -105,14 +105,14 @@ describe('checkSecurityRelease — strong phrase signals', () => {
     { body: 'exploitable buffer', expectedReason: 'Mentions exploit' },
     { body: 'exploited in the wild', expectedReason: 'Mentions exploit' },
     { body: 'CVSS score 9.8', expectedReason: 'Mentions CVSS score' },
-  ])('$expectedReason → isSecurity', ({ body, expectedReason }) => {
+  ])('$expectedReason -> isSecurity', ({ body, expectedReason }) => {
     const result = checkSecurityRelease(release({ body }))
     expect(result.isSecurity).toBe(true)
     expect(result.reasons).toContain(expectedReason)
   })
 })
 
-describe('checkSecurityRelease — medium phrase signals', () => {
+describe('checkSecurityRelease - medium phrase signals', () => {
   test.each([
     {
       body: 'security fix included',
@@ -186,14 +186,14 @@ describe('checkSecurityRelease — medium phrase signals', () => {
       body: 'improper authorization logic',
       expectedReason: 'Mentions improper validation/auth',
     },
-  ])('$expectedReason → isSecurity', ({ body, expectedReason }) => {
+  ])('$expectedReason -> isSecurity', ({ body, expectedReason }) => {
     const result = checkSecurityRelease(release({ body }))
     expect(result.isSecurity).toBe(true)
     expect(result.reasons).toContain(expectedReason)
   })
 })
 
-describe('checkSecurityRelease — markdown section headers', () => {
+describe('checkSecurityRelease - markdown section headers', () => {
   test.each([
     {
       body: '## Security\nFixed an issue.',
@@ -211,14 +211,14 @@ describe('checkSecurityRelease — markdown section headers', () => {
       body: '## Vulnerabilities\nSee below.',
       expectedReason: 'Has Vulnerabilities section header',
     },
-  ])('$expectedReason → isSecurity', ({ body, expectedReason }) => {
+  ])('$expectedReason -> isSecurity', ({ body, expectedReason }) => {
     const result = checkSecurityRelease(release({ body }))
     expect(result.isSecurity).toBe(true)
     expect(result.reasons).toContain(expectedReason)
   })
 })
 
-describe('checkSecurityRelease — corroboration rule (weak signals only)', () => {
+describe('checkSecurityRelease - corroboration rule (weak signals only)', () => {
   test.each([
     {
       label: 'single weak signal below threshold',
@@ -231,7 +231,7 @@ describe('checkSecurityRelease — corroboration rule (weak signals only)', () =
         body: 'This is critical. A malicious attacker could abuse this. Urgent.',
       },
       // "critical" (2) + "malicious" (2) + "attacker" (2) + "urgent" (1) = 7,
-      // but all requiresCorroboration → hasNonWeakMatch stays false
+      // but all requiresCorroboration -> hasNonWeakMatch stays false
     },
     {
       label: 'weak signals split across title and body',
@@ -240,15 +240,15 @@ describe('checkSecurityRelease — corroboration rule (weak signals only)', () =
         body: 'Improved security hardening across the board.',
       },
       // "critical" in title (2 × 1.5 = 3) + "security" in body (2) = 5 ≥ threshold,
-      // but both requiresCorroboration → hasNonWeakMatch stays false
+      // but both requiresCorroboration -> hasNonWeakMatch stays false
     },
-  ])('$label → not flagged as security', ({ overrides }) => {
+  ])('$label -> not flagged as security', ({ overrides }) => {
     const result = checkSecurityRelease(release(overrides))
     expect(result.isSecurity).toBe(false)
   })
 })
 
-describe('checkSecurityRelease — non-security releases', () => {
+describe('checkSecurityRelease - non-security releases', () => {
   test.each([
     { body: '', label: 'empty body' },
     {
@@ -259,7 +259,7 @@ describe('checkSecurityRelease — non-security releases', () => {
       body: 'Bug fixes and stability improvements.',
       label: 'generic bug fix',
     },
-  ])('$label → not security', ({ body }) => {
+  ])('$label -> not security', ({ body }) => {
     const result = checkSecurityRelease(release({ body }))
     expect(result.isSecurity).toBe(false)
   })
@@ -272,7 +272,7 @@ describe('checkSecurityRelease — non-security releases', () => {
   })
 })
 
-describe('checkSecurityRelease — confidence levels', () => {
+describe('checkSecurityRelease - confidence levels', () => {
   test.each([
     {
       body: 'CVE-2024-00001 patched.',
@@ -290,7 +290,7 @@ describe('checkSecurityRelease — confidence levels', () => {
       label: 'score ≥ 5 and < 7',
     },
   ] as const)(
-    '$label → $expectedConfidence confidence',
+    '$label -> $expectedConfidence confidence',
     ({ body, expectedConfidence }) => {
       const result = checkSecurityRelease(release({ body }))
       expect(result.confidence).toBe(expectedConfidence)
@@ -298,7 +298,7 @@ describe('checkSecurityRelease — confidence levels', () => {
   )
 })
 
-describe('checkSecurityRelease — deduplication of reasons', () => {
+describe('checkSecurityRelease - deduplication of reasons', () => {
   test('same signal in title and body appears only once in reasons', () => {
     const result = checkSecurityRelease(
       release({

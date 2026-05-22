@@ -27,7 +27,7 @@ const SECURITY_SIGNALS: Signal[] = [
     reason: 'Contains OSV identifier',
   },
 
-  // Markdown section header — very strong signal, maintainers don't add this casually.
+  // Markdown section header - very strong signal, maintainers don't add this casually.
   {
     pattern: /^#+\s*security(\s+(fixes?|updates?|advisor))?/im,
     weight: 9,

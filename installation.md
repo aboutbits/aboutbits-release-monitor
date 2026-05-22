@@ -15,11 +15,11 @@ This guide covers self-hosting the Release Monitor Slack app. The app runs as a 
 
 You need to create a Slack app in your workspace:
 
-1. Go to [api.slack.com/apps](https://api.slack.com/apps) and click **Create New App → From an app manifest**.
+1. Go to [api.slack.com/apps](https://api.slack.com/apps) and click **Create New App -> From an app manifest**.
 2. Paste the contents of [`manifest.json`](./manifest.json) from this repository.
 3. Install the app to your workspace.
 4. Under **OAuth & Permissions**, copy the **Bot User OAuth Token** (`xoxb-…`).
-5. Under **Basic Information → App-Level Tokens**, create a token with the `connections:write` scope and copy it (`xapp-…`).
+5. Under **Basic Information -> App-Level Tokens**, create a token with the `connections:write` scope and copy it (`xapp-…`).
 
 ### Forges
 

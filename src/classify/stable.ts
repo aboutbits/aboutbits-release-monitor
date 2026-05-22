@@ -1,7 +1,7 @@
 import type { Release, StableFilterResult } from '@classify/types'
 
 // Tag-name fragments that indicate a non-stable release.
-// Note: the primary signal is GitHub's `prerelease: true` flag — this list
+// Note: the primary signal is GitHub's `prerelease: true` flag - this list
 // is defense-in-depth for maintainers who don't set the flag.
 const UNSTABLE_IDENTIFIERS = [
   'alpha',
@@ -26,7 +26,7 @@ const UNSTABLE_IDENTIFIERS = [
 // Anchored to require a separator (- . _) or start-of-string before, and
 // a digit, separator, or end-of-string after. This avoids false positives
 // like "src" matching "rc". Known limitation: tags without a separator
-// before the identifier (e.g. "v1.0.0alpha1") will not match — we rely on
+// before the identifier (e.g. "v1.0.0alpha1") will not match - we rely on
 // GitHub's `prerelease: true` flag to catch those. Semver build metadata
 // ("1.2.3+20240101") is correctly treated as stable.
 const UNSTABLE_PATTERN = new RegExp(

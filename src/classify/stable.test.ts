@@ -13,7 +13,7 @@ function release(overrides: Partial<Release> = {}): Release {
   }
 }
 
-describe('classifyRelease — draft / prerelease flags', () => {
+describe('classifyRelease - draft / prerelease flags', () => {
   test.each([
     {
       overrides: { isDraft: true },
@@ -31,7 +31,7 @@ describe('classifyRelease — draft / prerelease flags', () => {
       label: 'draft takes precedence over prerelease',
     },
   ])(
-    '$label → not stable (reason: $expectedReason)',
+    '$label -> not stable (reason: $expectedReason)',
     ({ overrides, expectedReason }) => {
       const result = classifyRelease(release(overrides))
       expect(result.stable).toBe(false)
@@ -40,7 +40,7 @@ describe('classifyRelease — draft / prerelease flags', () => {
   )
 })
 
-describe('classifyRelease — stable tag names', () => {
+describe('classifyRelease - stable tag names', () => {
   test.each([
     { tagName: 'v1.0.0' },
     { tagName: '1.2.3' },
@@ -58,7 +58,7 @@ describe('classifyRelease — stable tag names', () => {
   })
 })
 
-describe('classifyRelease — unstable tag names', () => {
+describe('classifyRelease - unstable tag names', () => {
   test.each([
     { tagName: 'v1.0.0-alpha', expectedMatch: 'alpha' },
     { tagName: 'v1.0.0-alpha.1', expectedMatch: 'alpha' },
@@ -97,7 +97,7 @@ describe('classifyRelease — unstable tag names', () => {
   )
 })
 
-describe('classifyRelease — false-positive guards', () => {
+describe('classifyRelease - false-positive guards', () => {
   test.each([
     { tagName: 'v1.0.0-src', label: '"src" does not trigger "rc"' },
     {

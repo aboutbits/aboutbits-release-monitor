@@ -12,7 +12,7 @@ await migrate(db, {
 console.log('Migrations applied')
 
 const POLL_CRON = process.env.POLL_CRON ?? '0 * * * *' // every hour
-const DIGEST_CRON = process.env.DIGEST_CRON ?? '30 7 * * *' // 07:30 UTC = 09:30 Europe/Rome (CEST); shifts to 08:30 in winter (CET)
+const DIGEST_CRON = process.env.DIGEST_CRON ?? '30 7 * * *' // 07:30 UTC
 
 const pollCron = Bun.cron(POLL_CRON, async () => {
   console.log('Running poll job...')

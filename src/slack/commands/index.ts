@@ -40,7 +40,7 @@ app.command('/releases', async ({ command, ack, respond }) => {
       : undefined
 
     await respond({
-      text: 'Releases — usage',
+      text: 'Releases - usage',
       blocks: buildUsageBlocks(preamble),
     })
     return

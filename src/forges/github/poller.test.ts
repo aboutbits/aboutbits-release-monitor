@@ -38,7 +38,7 @@ beforeEach(() => {
   githubFetchMock.mockReset()
 })
 
-describe('pollGithubReleases — 304 not modified', () => {
+describe('pollGithubReleases - 304 not modified', () => {
   test('echoes lastKnownId and pollToken', async () => {
     githubFetchMock.mockResolvedValueOnce(new Response(null, { status: 304 }))
 
@@ -85,7 +85,7 @@ describe('pollGithubReleases — 304 not modified', () => {
   })
 })
 
-describe('pollGithubReleases — 200 first poll', () => {
+describe('pollGithubReleases - 200 first poll', () => {
   test('returns all stable releases sorted by publishedAt desc', async () => {
     githubFetchMock.mockResolvedValueOnce(
       jsonResponse(
@@ -161,7 +161,7 @@ describe('pollGithubReleases — 200 first poll', () => {
   })
 })
 
-describe('pollGithubReleases — 200 with lastKnownId', () => {
+describe('pollGithubReleases - 200 with lastKnownId', () => {
   test('returns only releases newer than lastKnownId', async () => {
     githubFetchMock.mockResolvedValueOnce(
       jsonResponse([
@@ -208,7 +208,7 @@ describe('pollGithubReleases — 200 with lastKnownId', () => {
   })
 })
 
-describe('pollGithubReleases — filtering', () => {
+describe('pollGithubReleases - filtering', () => {
   test('filters prerelease and draft, but they still count toward maxKnownId', async () => {
     githubFetchMock.mockResolvedValueOnce(
       jsonResponse([

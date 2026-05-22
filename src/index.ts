@@ -15,17 +15,19 @@ const POLL_CRON = process.env.POLL_CRON ?? '0 * * * *' // every hour
 const DIGEST_CRON = process.env.DIGEST_CRON ?? '30 7 * * *' // 07:30 UTC
 
 const pollCron = Bun.cron(POLL_CRON, async () => {
-  console.log('Running poll job...')
+  console.log('Poll job - started')
   await runPollJob().catch((err: unknown) => {
-    console.error('Poll job error:', err)
+    console.error('Poll job - error:', err)
   })
+  console.log('Poll job - finished')
 })
 
 const digestCron = Bun.cron(DIGEST_CRON, async () => {
-  console.log('Running digest job...')
+  console.log('Digest job - started')
   await runDigestJob().catch((err: unknown) => {
-    console.error('Digest job error:', err)
+    console.error('Digest job - error:', err)
   })
+  console.log('Digest job - finished')
 })
 
 await app.start()

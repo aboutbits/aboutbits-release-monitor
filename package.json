@@ -29,5 +29,8 @@
   "dependencies": {
     "@slack/bolt": "^4.7.2",
     "drizzle-orm": "^0.45.2"
+  },
+  "patchedDependencies": {
+    "drizzle-orm@0.45.2": "patches/drizzle-orm@0.45.2.patch"
   }
 }

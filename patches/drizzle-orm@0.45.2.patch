@@ -11,3 +11,16 @@ index b2c2a77086503f751985bc6928d398c62cf79762..e3797057a3c1482063b534fdda1542f1
      await session.execute(migrationTableCreate);
      const dbMigrations = await session.all(
        import_sql2.sql`select id, hash, created_at from ${import_sql2.sql.identifier(migrationsSchema)}.${import_sql2.sql.identifier(migrationsTable)} order by created_at desc limit 1`
+diff --git a/pg-core/dialect.js b/pg-core/dialect.js
+index 31a019cc0a6bc67303a745fdf9ad613e8fbdcb5f..0374dccd641bffe3ae77e22aad8d4bbf159a6f5d 100644
+--- a/pg-core/dialect.js
++++ b/pg-core/dialect.js
+@@ -51,7 +51,7 @@ class PgDialect {
+ 				created_at bigint
+ 			)
+ 		`;
+-    await session.execute(sql`CREATE SCHEMA IF NOT EXISTS ${sql.identifier(migrationsSchema)}`);
++    //await session.execute(sql`CREATE SCHEMA IF NOT EXISTS ${sql.identifier(migrationsSchema)}`);
+     await session.execute(migrationTableCreate);
+     const dbMigrations = await session.all(
+       sql`select id, hash, created_at from ${sql.identifier(migrationsSchema)}.${sql.identifier(migrationsTable)} order by created_at desc limit 1`

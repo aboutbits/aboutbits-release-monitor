@@ -1,7 +1,9 @@
 import { drizzle } from 'drizzle-orm/bun-sql'
+import { positiveInt, requiredString } from '@utils/env'
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is required')
-}
-
-export const db = drizzle(process.env.DATABASE_URL)
+export const db = drizzle({
+  connection: {
+    url: requiredString('DATABASE_URL'),
+    max: positiveInt('DB_POOL_MAX', 10),
+  },
+})

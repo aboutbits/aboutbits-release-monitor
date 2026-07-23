@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 import { buildListBlocks } from '@bot/blocks/list'
 import { db } from '@db/client'
 import { repositories, subscriptions } from '@db/schema'
@@ -21,6 +21,10 @@ export async function handleList(
     .from(subscriptions)
     .innerJoin(repositories, eq(subscriptions.repositoryId, repositories.id))
     .where(eq(subscriptions.channelId, ctx.channelId))
+    .orderBy(
+      sql`lower(${repositories.owner})`,
+      sql`lower(${repositories.repo})`,
+    )
 
   if (rows.length === 0) {
     await ctx.respond(

@@ -49,4 +49,11 @@ describe('parseRepo', () => {
   test('returns null for empty string', () => {
     expect(parseRepo('')).toBeNull()
   })
+
+  test('lowercases owner and repo', () => {
+    expect(parseRepo('Torvalds/Linux')).toEqual({
+      owner: 'torvalds',
+      name: 'linux',
+    })
+  })
 })

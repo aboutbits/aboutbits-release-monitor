@@ -15,5 +15,8 @@ export function parseRepo(arg: string): { owner: string; name: string } | null {
   }
 
   const idx = arg.indexOf('/')
-  return { owner: arg.slice(0, idx), name: arg.slice(idx + 1) }
+  return {
+    owner: arg.slice(0, idx).toLowerCase(),
+    name: arg.slice(idx + 1).toLowerCase(),
+  }
 }

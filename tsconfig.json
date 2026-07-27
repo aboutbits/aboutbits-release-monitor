@@ -13,11 +13,12 @@
     "noEmit": true,
     "skipLibCheck": true,
     "paths": {
-      "@db/*":       ["./src/db/*"],
-      "@forges/*":   ["./src/forges/*"],
-      "@bot/*":      ["./src/slack/*"],
-      "@jobs/*":     ["./src/jobs/*"],
-      "@classify/*": ["./src/classify/*"]
+      "@db/*": ["./src/db/*"],
+      "@forges/*": ["./src/forges/*"],
+      "@bot/*": ["./src/slack/*"],
+      "@jobs/*": ["./src/jobs/*"],
+      "@classify/*": ["./src/classify/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   }
 }

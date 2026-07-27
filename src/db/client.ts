@@ -4,6 +4,6 @@ import { positiveInt, requiredString } from '@utils/env'
 export const db = drizzle({
   connection: {
     url: requiredString('DATABASE_URL'),
-    max: positiveInt('DB_POOL_MAX', 10),
+    max: positiveInt('DATABASE_POOL_MAX', 10),
   },
 })

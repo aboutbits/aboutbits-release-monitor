@@ -9,7 +9,7 @@ declare module 'bun' {
 
     // Database
     DATABASE_URL: string
-    DB_POOL_MAX?: string
+    DATABASE_POOL_MAX?: string
     // Jobs
     POLL_CRON?: string
     DIGEST_CRON?: string
